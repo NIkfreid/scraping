@@ -33,9 +33,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # SECRET_KEY = '!i@hnr=1s6%vg-b74l_dm!xk1!stbymuy1kthf$++5+l1m-+qx'
 SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["scrap-serv.herokuapp.com/", "localhost"]
+ALLOWED_HOSTS = ["scrap-serv.herokuapp.com", "localhost"]
 
 # Application definition
 
