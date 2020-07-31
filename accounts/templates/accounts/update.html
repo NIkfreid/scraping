@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Настройки{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-4 mx-auto">
+    <h4 class="my-2">Настройки пользователя</h4>
+  <form method="POST" action="">
+  <div class="form-group">
+    <br>
+    {{ form.as_p }}
+    {% csrf_token %}
+  </div>
+   <button type="submit" class="btn btn-primary">Применить</button>
+  </form>
+    <div class="col-md-2 ml-auto">
+    <form method="POST" action="{% url 'accounts:delete' %}">
+      {% csrf_token %}
+     <button type="submit" class="btn btn-danger my-3">Удалить </button>
+  </form>
+
+  </div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 mx-auto">
+    <h5 class="my-2">Если Вы не нашли подходящий вам набор, отправьте нам заявку</h5>
+    <p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsed" aria-expanded="false" aria-controls="collapseExample">
+    Заполнить форму
+  </button>
+</p>
+<div class="collapse" id="collapsed">
+  <div class="card card-body">
+    <form method="POST" action="{% url 'accounts:contact' %}">
+    <div class="form-group">
+      <br>
+      {{ contact_form.as_p }}
+      {% csrf_token %}
+    </div>
+     <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+  </div>
+</div>
+
+  </div>
+</div>
+{% endblock %}

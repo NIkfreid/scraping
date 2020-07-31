@@ -1,0 +1,31 @@
+from django.core.paginator import Paginator
+from django.shortcuts import render
+
+from .forms import FindForm
+from .models import Vacancy
+
+
+def home_view(request):
+    form = FindForm()
+    context = {"form": form}
+    return render(request, "scraper/home.html", context)
+
+
+def list_view(request):
+    form = FindForm()
+    city = request.GET.get('city')
+    language = request.GET.get('language')
+    page_obj = []
+    if city or language:
+        _filter = {}
+        if city:
+            _filter["city__slug"] = city
+        if language:
+            _filter["language__slug"] = language
+        qs = Vacancy.objects.filter(**_filter)
+        paginator = Paginator(qs, 20)  # Show 20 vacancy per page.
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+    context = {"object_list": page_obj, "form": form, "city": city, "language": language}
+    return render(request, "scraper/list.html", context)

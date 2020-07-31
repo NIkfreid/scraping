@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+
+{% if object_list %}
+<h3 class="my-4 text-center">Результаты запроса</h3>
+  {% for obj in  object_list %}
+      <div class="card my-3">
+      <div class="card-header">
+        <h5><a href="{{ obj.url }}">{{ obj.title }}</a></h5>
+      </div>
+      <div class="card-body">
+
+        <p class="card-text">{{ obj.description |truncatewords:40 }}</p>
+        <p><strong>{{ obj.company }}</strong></p>
+        <p>{{ obj.city.name}} | {{ obj.language.name }} | <small>{{ obj.timestamp}}</small></p><br/>
+      </div>
+      </div>
+  {% endfor %}
+  <div class="row">
+    <div class="col">
+     <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if object_list.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?city={{ city }}&language={{ language }}&page=1" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        {% endif %}
+        {% for page in object_list.paginator.page_range %}
+           <li class="page-item {% if page == object_list.number %} active {% endif %}">
+             <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ page }}">{{ page }}</a></li>
+        {% endfor %}
+        {% if object_list.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ object_list.next_page_number }} aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+
+        {% endif %}
+      </ul>
+    </nav>
+
+<div class="row">
+  <div class="col-md-3">
+  <form method="GET" action="{% url 'list' %}">
+  <div class="form-group">
+    <br>
+    {{ form.as_p }}
+  </div>
+   <button type="submit" class="btn btn-primary">Поиск</button>
+  </form>
+</div>
+</div>
+{% else %}
+        <h3 class="my-4 text-center">К сожалению по вашему запросу, данных не найдено</h3>
+{% endif %}
+{% endblock %}

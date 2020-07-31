@@ -1,0 +1,12 @@
+@font-face {
+    font-family: zeyada;
+    src: url(../fonts/Zeyada.ttf);
+}
+
+
+
+#brand {
+  font-family: zeyada;
+  color: #209CEE;
+  font-size:35px;
+}
