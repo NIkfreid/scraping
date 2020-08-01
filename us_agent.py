@@ -1,6 +1,6 @@
 import random
 
-from src.scraping.settings.local_settings import BASE_DIR
+from scraping.settings.local_settings import BASE_DIR
 
 
 def choice_useragent():
